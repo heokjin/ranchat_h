@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "177968038675",
+    "firebase_url": "https://ranchat-h.firebaseio.com",
+    "project_id": "ranchat-h",
+    "storage_bucket": "ranchat-h.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177968038675:android:d72a0aed92af6939",
+        "android_client_info": {
+          "package_name": "com.heokjin.ranchat_h"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177968038675-7nn1nlm8hs73a6h9u5ch6revbokt0ski.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqd_gVqdUN_MvhynbEwoi1Z13UboAgutw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177968038675-7nn1nlm8hs73a6h9u5ch6revbokt0ski.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
