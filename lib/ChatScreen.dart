@@ -29,7 +29,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _textEditingController = new TextEditingController();
+  final TextEditingController _textEditingController =
+      new TextEditingController();
   bool _isComposingMessage = false;
   final reference = FirebaseDatabase.instance.reference().child('ranchat-h');
 
@@ -39,7 +40,7 @@ class ChatScreenState extends State<ChatScreen> {
         appBar: new AppBar(
           title: new Text("Flutter Chat App"),
           elevation:
-          Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           actions: <Widget>[
             new IconButton(
                 icon: new Icon(Icons.exit_to_app), onPressed: _signOut)
@@ -58,16 +59,16 @@ class ChatScreenState extends State<ChatScreen> {
                   itemBuilder: (_, DataSnapshot messageSnapshot,
                       Animation<double> animation, int index) {
                     return new ChatMessageListItem(
-                      messageSnapshot: messageSnapshot,
-                      animation: animation,
-                    );
+                        messageSnapshot: messageSnapshot,
+                        animation: animation,
+                        currentUserEmail: currentUserEmail);
                   },
                 ),
               ),
               new Divider(height: 1.0),
               new Container(
                 decoration:
-                new BoxDecoration(color: Theme.of(context).cardColor),
+                    new BoxDecoration(color: Theme.of(context).cardColor),
                 child: _buildTextComposer(),
               ),
               new Builder(builder: (BuildContext context) {
@@ -78,15 +79,14 @@ class ChatScreenState extends State<ChatScreen> {
           ),
           decoration: Theme.of(context).platform == TargetPlatform.iOS
               ? new BoxDecoration(
-              border: new Border(
-                  top: new BorderSide(
-                    color: Colors.grey[200],
-                  )))
+                  border: new Border(
+                      top: new BorderSide(
+                  color: Colors.grey[200],
+                )))
               : null,
         ));
-
-
   }
+
   CupertinoButton getIOSSendButton() {
     return new CupertinoButton(
       child: new Text("Send"),
@@ -128,7 +128,8 @@ class ChatScreenState extends State<ChatScreen> {
                       File imageFile = await ImagePicker.pickImage();
                       int timestamp = new DateTime.now().millisecondsSinceEpoch;
 
-                      var downloadUrl = uploadImage(imageFile, "img_" + timestamp.toString() + ".jpg");
+                      var downloadUrl = uploadImage(
+                          imageFile, "img_" + timestamp.toString() + ".jpg");
                       _sendMessage(
                           messageText: null, imageUrl: downloadUrl.toString());
                     }),
@@ -143,7 +144,7 @@ class ChatScreenState extends State<ChatScreen> {
                   },
                   onSubmitted: _textMessageSubmitted,
                   decoration:
-                  new InputDecoration.collapsed(hintText: "Send a message"),
+                      new InputDecoration.collapsed(hintText: "Send a message"),
                 ),
               ),
               new Container(
@@ -212,8 +213,7 @@ class ChatScreenState extends State<ChatScreen> {
   Future _signOut() async {
     await auth.signOut();
     googleSignIn.signOut();
-    Scaffold
-        .of(_scaffoldContext)
+    Scaffold.of(_scaffoldContext)
         .showSnackBar(new SnackBar(content: new Text('User logged out')));
   }
 
