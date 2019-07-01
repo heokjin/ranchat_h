@@ -125,13 +125,12 @@ class ChatScreenState extends State<ChatScreen> {
                     ),
                     onPressed: () async {
                       await _ensureLoggedIn();
-                      File imageFile = await ImagePicker.pickImage();
+                      File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
                       int timestamp = new DateTime.now().millisecondsSinceEpoch;
 
-                      var downloadUrl = uploadImage(
-                          imageFile, "img_" + timestamp.toString() + ".jpg");
-                      _sendMessage(
-                          messageText: null, imageUrl: downloadUrl.toString());
+                      uploadImage(imageFile, "img_" + timestamp.toString() + ".jpg").then((downloadUrl) {
+                        _sendMessage(messageText: null, imageUrl: downloadUrl.toString());
+                      });
                     }),
               ),
               new Flexible(
@@ -158,17 +157,10 @@ class ChatScreenState extends State<ChatScreen> {
         ));
   }
 
-  Future<String> uploadImage(var imageFile, String fileName) async {
-    String downloadUrl;
-    StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
-    await ref.putFile(imageFile).onComplete.then((val) {
-      val.ref.getDownloadURL().then((val) {
-        print(val);
-        downloadUrl = val; //Val here is Already String
-      });
-    });
-
-    return downloadUrl;
+  Future<String> uploadImage(var image, String fileName) async {
+    StorageReference reference = FirebaseStorage.instance.ref().child(fileName);
+    StorageUploadTask uploadTask = reference.putFile(image);
+    return await (await uploadTask.onComplete).ref.getDownloadURL();
   }
 
   Future<Null> _textMessageSubmitted(String text) async {
