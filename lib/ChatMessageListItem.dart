@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 
 class ChatMessageListItem extends StatelessWidget {
@@ -40,10 +41,14 @@ class ChatMessageListItem extends StatelessWidget {
             new Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null
-                  ? new Image.network(
-                      messageSnapshot.value['imageUrl'],
-                      width: 250.0,
-                    )
+                  ? CachedNetworkImage(
+                  //placeholder: (context, url) => CircularProgressIndicator(),
+                  imageUrl: messageSnapshot.value['imageUrl'])
+
+//              new Image.network(
+//                      messageSnapshot.value['imageUrl'],
+//                      width: 250.0,
+//                    )
                   : new Text(messageSnapshot.value['text']),
             ),
           ],
@@ -88,10 +93,14 @@ class ChatMessageListItem extends StatelessWidget {
             new Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null
-                  ? new Image.network(
-                      messageSnapshot.value['imageUrl'],
-                      width: 250.0,
-                    )
+                  ? CachedNetworkImage(
+//                placeholder: (context, url) => CircularProgressIndicator(),
+                imageUrl: messageSnapshot.value['imageUrl'])
+
+//              new Image.network(
+//                      messageSnapshot.value['imageUrl'],
+//                      width: 250.0,
+//                    )
                   : new Text(messageSnapshot.value['text']),
             ),
           ],
