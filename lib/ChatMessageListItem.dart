@@ -13,6 +13,7 @@ class ChatMessageListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(currentUserEmail);
     return new SizeTransition(
       sizeFactor:
           new CurvedAnimation(parent: animation, curve: Curves.decelerate),
@@ -42,7 +43,7 @@ class ChatMessageListItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null
                   ? CachedNetworkImage(
-                  //placeholder: (context, url) => CircularProgressIndicator(),
+                  placeholder: (context, url) => CircularProgressIndicator(),
                   imageUrl: messageSnapshot.value['imageUrl'])
 
 //              new Image.network(
@@ -94,7 +95,7 @@ class ChatMessageListItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null
                   ? CachedNetworkImage(
-//                placeholder: (context, url) => CircularProgressIndicator(),
+                placeholder: (context, url) => CircularProgressIndicator(),
                 imageUrl: messageSnapshot.value['imageUrl'])
 
 //              new Image.network(

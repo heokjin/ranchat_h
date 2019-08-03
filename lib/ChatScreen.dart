@@ -9,11 +9,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ranchat_h/ChatMessageListItem.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final googleSignIn = new GoogleSignIn();
 final analytics = new FirebaseAnalytics();
@@ -38,10 +37,11 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Flutter Chat App"),
-          elevation:
-              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+          title: new Text("OpenChat"),
+          elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           actions: <Widget>[
+            new IconButton(
+                icon: new Icon(Icons.touch_app), onPressed: _ensureLoggedIn),
             new IconButton(
                 icon: new Icon(Icons.exit_to_app), onPressed: _signOut)
           ],
@@ -196,6 +196,7 @@ class ChatScreenState extends State<ChatScreen> {
     }
 
     currentUserEmail = googleSignIn.currentUser.email;
+    print("SET current Email: " + currentUserEmail);
 
     if (await auth.currentUser() == null) {
       await _handleSignIn();
@@ -220,4 +221,11 @@ class ChatScreenState extends State<ChatScreen> {
     print("signed in " + user.displayName);
     return user;
   }
+
+  @override
+  void initState() {
+    print("START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    _ensureLoggedIn();
+  }
+
 }

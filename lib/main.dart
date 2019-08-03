@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ranchat_h/util/Themes.dart';
-
 import 'ChatScreen.dart';
 
 void main() => runApp(MyApp());
