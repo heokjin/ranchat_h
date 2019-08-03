@@ -197,6 +197,9 @@ class ChatScreenState extends State<ChatScreen> {
 
     currentUserEmail = googleSignIn.currentUser.email;
     print("SET current Email: " + currentUserEmail);
+    setState(() {
+      print("Set state");
+    });
 
     if (await auth.currentUser() == null) {
       await _handleSignIn();

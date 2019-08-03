@@ -13,7 +13,6 @@ class ChatMessageListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(currentUserEmail);
     return new SizeTransition(
       sizeFactor:
           new CurvedAnimation(parent: animation, curve: Curves.decelerate),
